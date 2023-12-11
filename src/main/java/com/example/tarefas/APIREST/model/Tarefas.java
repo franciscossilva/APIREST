@@ -1,10 +1,6 @@
 package com.example.tarefas.APIREST.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,49 +10,16 @@ import java.util.Date;
 public class Tarefas {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
     private String titulo;
-    private String descriçao;
+    private String descricao;
     private Date dataVencimento;
     private boolean status;
 
-    public Long getId() {
-        return Id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescriçao() {
-        return descriçao;
-    }
-
-    public void setDescriçao(String descriçao) {
-        this.descriçao = descriçao;
-    }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public Tarefas(long l, String título, String descrição, Date dataVencimento, boolean b, Object o) {
     }
 }
