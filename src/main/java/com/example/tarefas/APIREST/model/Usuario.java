@@ -16,6 +16,6 @@ public class Usuario {
     private String senha;
 
 
-    public Usuario(long l, String usuarioTeste, String senhaTeste) {
+    public Usuario(String usuarioTeste, String senhaTeste) {
     }
 }

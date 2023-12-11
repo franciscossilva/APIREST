@@ -20,6 +20,6 @@ public class Tarefas {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public Tarefas(long l, String título, String descrição, Date dataVencimento, boolean b, Object o) {
+    public Tarefas(Long l, String s, String s1, Date date, boolean b, Object o) {
     }
 }

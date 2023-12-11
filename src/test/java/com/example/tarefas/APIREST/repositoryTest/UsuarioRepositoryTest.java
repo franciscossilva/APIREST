@@ -20,7 +20,7 @@ public class UsuarioRepositoryTest {
 
     @Test
     public void testFindByUsernameAndSenha() {
-        Usuario usuario = new Usuario(1L, "usuarioTeste", "senhaTeste");
+        Usuario usuario = new Usuario("usuarioTeste", "senhaTeste");
         usuarioRepository.save(usuario);
 
         Usuario usuarioEncontrado = usuarioRepository.findByUsernameAndSenha("usuarioTeste", "senhaTeste");
