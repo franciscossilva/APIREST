@@ -7,19 +7,14 @@ import java.util.Date;
 
 @Entity
 @Data
+@Table(name= "TB_Tarefas")
 public class Tarefas {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
     private String descricao;
     private Date dataVencimento;
     private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    public Tarefas(Long l, String s, String s1, Date date, boolean b, Object o) {
-    }
 }

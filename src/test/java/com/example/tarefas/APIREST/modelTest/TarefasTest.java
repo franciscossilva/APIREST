@@ -1,37 +1,64 @@
-import com.example.tarefas.APIREST.model.Tarefas;
-import org.junit.Test;
-import java.util.Date;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+package com.example.tarefas.APIREST.modelTest;
 
-public class TarefasTest {
+import com.example.tarefas.APIREST.model.Tarefas;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Date;
+
+class TarefasTest {
 
     @Test
-    public void testGetterSetter() {
-        Tarefas tarefa = new Tarefas(1L, "Tarefa 1", "Descrição 1", new Date(), true, null);
-        tarefa.setTitulo("Título");
-        assertEquals("Título", tarefa.getTitulo());
+    void testGettersAndSetters() {
 
-        tarefa.setDescricao("Descrição");
-        assertEquals("Descrição", tarefa.getDescricao());
+        Tarefas tarefa = new Tarefas();
+
+
+
+        tarefa.setId(1L);
+
+
+        assertEquals(1L, tarefa.getId());
+
+
+        tarefa.setTitulo("Teste Título");
+
+
+        assertEquals("Teste Título", tarefa.getTitulo());
+
+
+        tarefa.setDescricao("Teste Descrição");
+
+
+        assertEquals("Teste Descrição", tarefa.getDescricao());
+
 
         Date dataVencimento = new Date();
         tarefa.setDataVencimento(dataVencimento);
+
+
         assertEquals(dataVencimento, tarefa.getDataVencimento());
 
+
         tarefa.setStatus(true);
-        assertEquals(true, tarefa.isStatus());
+
+
+        assertTrue(tarefa.isStatus());
     }
 
-    @Test
-    public void testConstrutor() {
-        Tarefas tarefa = new Tarefas(1L, "Tarefa 1", "Descrição 1", new Date(), true, null);
-        assertNull(tarefa.getId()); // ID deve ser nulo ao criar uma nova tarefa
 
-        // Testar outros atributos, garantindo que eles estejam inicializados adequadamente
-        assertNull(tarefa.getTitulo());
-        assertNull(tarefa.getDescricao());
-        assertNull(tarefa.getDataVencimento());
-        assertEquals(false, tarefa.isStatus());
+    @Test
+    void testToString() {
+
+        Tarefas tarefa = new Tarefas();
+        tarefa.setId(1L);
+        tarefa.setTitulo("Teste Título");
+        tarefa.setDescricao(null);  // Tratamento para descrição nula
+
+
+        String expectedToString = "Tarefas{id=1, titulo='Teste Título', descricao='null', dataVencimento=null, status=false}";
+
+
+
     }
 }
