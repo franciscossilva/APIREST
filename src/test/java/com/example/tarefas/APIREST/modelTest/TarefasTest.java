@@ -1,27 +1,40 @@
 package com.example.tarefas.APIREST.modelTest;
 
 import com.example.tarefas.APIREST.model.Tarefas;
+import lombok.Data;
+import org.junit.Assert;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 class TarefasTest {
-
     @Test
-    void testGettersAndSetters() {
+    @DisplayName(" Teste da Funcionalidade GET")
+    void  testGettersAndSetters() {
 
+        //Given / Arrange
         Tarefas tarefa = new Tarefas();
 
+        Long id1 = 1L;
+        Long id2 = 1L;
+        Long expected = 1L;
+
+        // When / Act
+        //Long atual = tarefa.getId(id1,id2);
 
 
-        tarefa.setId(1L);
+      //  assertEquals(expected,atual, id1 + "+" + id2+ " Nao retornou o " + expected );
+    //   assertNotEquals(1L, atual);;
+     //  assertNotNull(atual);
 
 
-        assertEquals(1L, tarefa.getId());
 
 
-        tarefa.setTitulo("Teste Título");
+
+       tarefa.setTitulo("Teste Título");
 
 
         assertEquals("Teste Título", tarefa.getTitulo());

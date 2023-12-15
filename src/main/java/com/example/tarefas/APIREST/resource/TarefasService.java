@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 
 @RequestMapping("/Tarefas")
-public class TarefasResource {
+public class TarefasService {
     @Autowired
     private TarefasRepository tarefasRepository;
 
@@ -46,7 +46,9 @@ public class TarefasResource {
 
     }
 
+
 }
+
 
 
 
