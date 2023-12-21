@@ -2,61 +2,44 @@ package com.example.tarefas.APIREST.repositoryTest;
 
 import com.example.tarefas.APIREST.model.Tarefas;
 import com.example.tarefas.APIREST.repository.TarefasRepository;
-import com.example.tarefas.APIREST.resource.TarefasService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
+@DataJpaTest
 public class TarefasRepositoryTest {
 
-    @Mock
-    private TarefasRepository tarefasRepositoryMock;
-
-    @InjectMocks
-    private TarefasService tarefasServiceTest;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+    @Autowired
+    private TarefasRepository tarefasRepository;
 
     @Test
-    public void testFindById() {
+    public void testFindByID() {
         // Arrange
-        long id = 1L;
-        Tarefas tarefaMock = new Tarefas();
-        tarefaMock.setId(id);
-        when(tarefasRepositoryMock.findById(id)).thenReturn(Optional.of(tarefaMock));
+        Tarefas tarefas = new Tarefas();
+        tarefas.setId(1L);
+        tarefasRepository.save(tarefas);
 
         // Act
-        //Tarefas result = tarefasServiceTest.
+        Tarefas result = tarefasRepository.findByID(1L);
 
         // Assert
-        //assertEquals(id, result.getId());
-        verify(tarefasRepositoryMock, times(1)).findById(id);
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
     }
-    @Disabled
+
     @Test
     public void testFindByTitulos() {
-        // Arrange
-        String titulo = "Tarefa 1";
-        Tarefas tarefaMock = new Tarefas();
-       // tarefaMock.setTitulos(titulo);
-        when(tarefasRepositoryMock.findByTitulos(titulo)).thenReturn(tarefaMock);
+        // Arrange (
+        Tarefas tarefas = new Tarefas();
+        tarefas.setTitulos("Teste");
+        tarefasRepository.save(tarefas);
 
         // Act
-       // Tarefas result = tarefasService.findByTitulos(titulo);
+        Tarefas result = tarefasRepository.findByTitulos("Teste");
 
         // Assert
-      //  assertEquals(titulo, result.getTitulos());
-        verify(tarefasRepositoryMock, times(1)).findByTitulos(titulo);
+        assertNotNull(result);
+        assertEquals("Teste", result.getTitulos());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.tarefas.APIREST.resource;
+package com.example.tarefas.APIREST.Servirce;
 
 import com.example.tarefas.APIREST.model.Tarefas;
 import com.example.tarefas.APIREST.repository.TarefasRepository;

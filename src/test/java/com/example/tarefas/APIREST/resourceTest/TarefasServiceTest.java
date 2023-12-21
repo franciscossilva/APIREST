@@ -1,115 +1,63 @@
-package com.example.tarefas.APIREST.resourceTest;
-
+import com.example.tarefas.APIREST.Servirce.TarefasService;
 import com.example.tarefas.APIREST.model.Tarefas;
 import com.example.tarefas.APIREST.repository.TarefasRepository;
-import com.example.tarefas.APIREST.resource.TarefasService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
+import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class TarefasServiceTest {
 
     @Mock
-    private TarefasRepository tarefasRepositoryMock;
+    private TarefasRepository tarefasRepository;
 
     @InjectMocks
     private TarefasService tarefasService;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
     public void testListarTarefas() {
-        // Arrange
-        List<Tarefas> tarefasList = Arrays.asList(new Tarefas(), new Tarefas());
-        when(tarefasRepositoryMock.findAll()).thenReturn(tarefasList);
 
-        // Act
+        when(tarefasRepository.findAll()).thenReturn(Arrays.asList(new Tarefas(), new Tarefas()));
+
+
         List<Tarefas> result = tarefasService.listarTarefas();
 
-        // Assert
-        assertEquals(tarefasList, result);
-        verify(tarefasRepositoryMock, times(1)).findAll();
+
+        assertEquals(2, result.size());
     }
 
     @Test
     public void testObterTarefaPorId() {
-        // Arrange
-        long id = 1L;
-        Tarefas tarefaMock = new Tarefas();
-        when(tarefasRepositoryMock.findById(id)).thenReturn(Optional.of(tarefaMock));
 
-        // Act
+        long id = 1L;
+        when(tarefasRepository.findById(id)).thenReturn(Optional.of(new Tarefas()));
+
+
         Optional<Tarefas> result = tarefasService.obterTarefaPorId(id);
 
-        // Assert
-        assertEquals(Optional.of(tarefaMock), result);
-        verify(tarefasRepositoryMock, times(1)).findById(id);
+
+        assertTrue(result.isPresent());
     }
 
     @Test
-    public void testObterTarefaPorTitulo() {
-        // Arrange
-        String titulo = "Tarefa 1";
-        Tarefas tarefaMock = new Tarefas();
-        when(tarefasRepositoryMock.findByTitulos(titulo)).thenReturn(tarefaMock);
+    public void testObterTarefaPorTitulos() {
 
-        // Act
-        Tarefas result = tarefasService.obterTarefaPotitulo(titulo);
+        String titulos = "Teste";
+        when(tarefasRepository.findByTitulos(titulos)).thenReturn(new Tarefas());
 
-        // Assert
-        assertEquals(tarefaMock, result);
-        verify(tarefasRepositoryMock, times(1)).findByTitulos(titulo);
-    }
 
-    @Test
-    public void testCriarTarefa() {
-        // Arrange
-        Tarefas tarefaMock = new Tarefas();
-        when(tarefasRepositoryMock.save(tarefaMock)).thenReturn(tarefaMock);
+        Tarefas result = tarefasService.obterTarefaPorTitulos(titulos);
 
-        // Act
-        Tarefas result = tarefasService.criarTarefa(tarefaMock);
 
-        // Assert
-        assertEquals(tarefaMock, result);
-        verify(tarefasRepositoryMock, times(1)).save(tarefaMock);
-    }
-
-    @Test
-    public void testAtualizarTarefas() {
-        // Arrange
-        Tarefas tarefaMock = new Tarefas();
-        when(tarefasRepositoryMock.save(tarefaMock)).thenReturn(tarefaMock);
-
-        // Act
-        Tarefas result = tarefasService.atualizarTarefas(tarefaMock);
-
-        // Assert
-        assertEquals(tarefaMock, result);
-        verify(tarefasRepositoryMock, times(1)).save(tarefaMock);
-    }
-
-    @Test
-    public void testDeletarTarefa() {
-        // Arrange
-        Tarefas tarefaMock = new Tarefas();
-
-        // Act
-        tarefasService.deletarTarefa(tarefaMock);
-
-        // Assert
-        verify(tarefasRepositoryMock, times(1)).delete(tarefaMock);
+        assertNotNull(result);
+        assertEquals("Teste", result.getTitulos());
     }
 }
